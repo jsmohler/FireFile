@@ -28,6 +28,10 @@
 				float: left;
 				display: inline-block;
 			}
+
+			#submit {
+				float:right;
+			}
 		</style>
 	</head>
 	<body>
@@ -42,7 +46,19 @@
 		</div>
 		<div style="margin-left: 225px">
 			<h1> Team Files </h1>
-			<hr>
+			<table id="my-table">
+				<tr>
+					<th> File Name </th>
+					<th> File Size </th>
+				</tr>
+			</table>
+
+			<form id="submit" action=>
+				<input type='file' id='file' />
+				<input type='submit' value='upload'>Submit</input>
+			</form>
+
 		</div>
+
 	</body>
 </html>

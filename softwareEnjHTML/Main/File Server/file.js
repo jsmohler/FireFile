@@ -11,6 +11,7 @@ Attributes:
     path (String)
 */
 
+//object constructor
 function File(content, name, isWriteable, isReadable, isDownloadable, comments, rubric, size, path)
 {
     //Adding attributes to object
