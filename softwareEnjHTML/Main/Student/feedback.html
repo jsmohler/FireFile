@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Feedback</title>
+  <charset meta="utf-8" />
+  <style>
+  .navbar {
+    overflow: hidden;
+    background-color: #8B2332;
+  }
+  .navbar a {
+    display: inline-block;
+    color: #8B6F4B;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 20px;
+  }
+  .navbar a:hover {
+    background-color: #8B6F4B;
+    color: black;
+  }
+  .navbar a:active {
+    background-color: #8B6F4B;
+    color: black;
+  }
+  .image {
+    float: left;
+    display: inline-block;
+  }
+
+  </style>
+  </head>
+  <body>
+
+  <div class="image">
+    <img src="../Images/tempicon.png">
+  </div>
+  <div class="navbar">
+    <a class="active" href="studentHome.html">Home</a>
+    <a href="studentContactInfo.html">Contact Info</a>
+    <a href="studentMessage.html">Message Team</a>
+    <a href="studentAccount.html">Account</a>
+  </div>
+  <div style="margin-left: 225px">
+    <h1> Feedback </h1>
+    <div id="frame" style="height:400px;"> </div>
+  </div>
+
+  <script>
+      var name = window.location.hash;
+      var file = localStorage.getItem(name);
+      var feedback = document.createElement('iframe');
+      feedback.src = file;
+      feedback.style = "width:60%; height:100%;"
+
+      var div = document.getElementById('frame');
+      div.appendChild(feedback);
+  </script>
+</body>
+</html>
