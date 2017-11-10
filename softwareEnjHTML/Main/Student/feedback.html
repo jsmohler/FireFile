@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Feedback</title>
+  <title>Feedback</title>
   <charset meta="utf-8" />
   <style>
   .navbar {
@@ -29,8 +29,8 @@
   }
 
   </style>
-  </head>
-  <body>
+</head>
+<body>
 
   <div class="image">
     <img src="../Images/tempicon.png">
@@ -43,18 +43,33 @@
   </div>
   <div style="margin-left: 225px">
     <h1> Feedback </h1>
+    <input type="button" value="Add Comment" style="float:center;" onclick="addComment()"/>
+    <table id="comments" style="float:right;" cellpadding="10">
+    </table>
     <div id="frame" style="height:400px;"> </div>
   </div>
 
-  <script>
-      var name = window.location.hash;
-      var file = localStorage.getItem(name);
-      var feedback = document.createElement('iframe');
-      feedback.src = file;
-      feedback.style = "width:60%; height:100%;"
 
-      var div = document.getElementById('frame');
-      div.appendChild(feedback);
+  <script>
+  i = 0;
+  function addComment() {
+    var comment = prompt("Please enter your comment");
+    var table = document.getElementById('comments');
+    var row = table.insertRow(i);
+    var text = row.insertCell(0);
+    text.style = "max-width:250px !important; overflow:scroll;";
+    text.innerHTML = comment;
+    i=i+1;
+  }
+
+  var name = window.location.hash;
+  var file = localStorage.getItem(name);
+  var feedback = document.createElement('iframe');
+  feedback.src = file;
+  feedback.style = "width:60%; height:100%;"
+
+  var div = document.getElementById('frame');
+  div.appendChild(feedback);
   </script>
 </body>
 </html>
