@@ -34,11 +34,21 @@
   <script>
     function init() {
       //// Initialize Firebase.
+<<<<<<< HEAD
       //// TODO: replace with your Firebase project configuration.
       var config = {
 
         apiKey: "AIzaSyDfBsx-cINFNm1qhEwCP80gEmmEc5rvSnw",
         databaseURL: "https://softwareengineeringproje-be6d0.firebaseio.com"
+=======
+      var config = {
+        apiKey: "AIzaSyDfBsx-cINFNm1qhEwCP80gEmmEc5rvSnw",
+    		authDomain: "softwareengineeringproje-be6d0.firebaseapp.com",
+    		databaseURL: "https://softwareengineeringproje-be6d0.firebaseio.com",
+    		projectId: "softwareengineeringproje-be6d0",
+    		storageBucket: "softwareengineeringproje-be6d0.appspot.com",
+    		messagingSenderId: "350274872134"
+>>>>>>> 9cfa7e47a09f61eeebabf60f060b7af3b40d0616
       };
       firebase.initializeApp(config);
       //// Get Firebase Database reference.
@@ -51,7 +61,73 @@
       //// Initialize contents.
       firepad.on('ready', function() {
         if (firepad.isHistoryEmpty()) {
+<<<<<<< HEAD
           firepad.setHtml('<span style="font-size: 24px;">Rich-text editing with <span style="color: red">Firepad!</span></span><br/><br/>Collaborative-editing made easy.\n');
+=======
+          firepad.setHtml(
+              '<span style="font-size: 24px;">Rich-text editing with <span style="color: red">Firepad!</span></span><br/>\n' +
+              '<br/>' +
+              '<div style="font-size: 18px">' +
+              'Supports:<br/>' +
+              '<ul>' +
+                '<li>Different ' +
+                  '<span style="font-family: impact">fonts,</span>' +
+                  '<span style="font-size: 24px;"> sizes, </span>' +
+                  '<span style="color: blue">and colors.</span>' +
+                '</li>' +
+                '<li>' +
+                  '<b>Bold, </b>' +
+                  '<i>italic, </i>' +
+                  '<u>and underline.</u>' +
+                '</li>' +
+                '<li>Lists' +
+                  '<ol>' +
+                    '<li>One</li>' +
+                    '<li>Two</li>' +
+                  '</ol>' +
+                '</li>' +
+                '<li>Undo / redo</li>' +
+                '<li>Cursor / selection synchronization.</li>' +
+                '<li><checkbox></checkbox> It supports customized entities.</li>' +
+                '<li>And it\'s all fully collaborative!</li>' +
+              '</ul>' +
+              '</div>');
+        }
+      });
+      // An example of a complex custom entity.
+      firepad.registerEntity('checkbox', {
+        render: function (info, entityHandler) {
+          var inputElement = document.createElement('input');
+          inputElement.setAttribute('type', 'checkbox');
+          if(info.checked) {
+            inputElement.checked = 'checked';
+          }
+          inputElement.addEventListener('click', function () {
+            entityHandler.replace({checked:this.checked});
+          });
+          return inputElement;
+        }.bind(this),
+        fromElement: function (element) {
+          var info = {};
+          if(element.hasAttribute('checked')) {
+            info.checked = true;
+          }
+          return info;
+        },
+        update: function (info, element) {
+          if (info.checked) {
+            element.checked = 'checked';
+          } else {
+            element.checked = null;
+          }
+        },
+        export: function (info) {
+          var inputElement = document.createElement('checkbox');
+          if(info.checked) {
+            inputElement.setAttribute('checked', true);
+          }
+          return inputElement;
+>>>>>>> 9cfa7e47a09f61eeebabf60f060b7af3b40d0616
         }
       });
     }
