@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Login</title>
-		<script src="login.js">
-		</script>
-	</head>
-	<body>
-		<center>
-			<img src="Images/templogo.jpg" hight="200" width="600">
-			<form action="Student/studentHome.html" method="post">
-				<label>Username</label>
-				<input type="email" name="username" id="username">
-				<br>
-				<label>Password&nbsp</label>
-				<input type="Password" name="password" id="password">
-				<br>
-				<br>
-				<input type="submit" value="Login">
-			</form>
+<head>
+	<title>Login</title>
+</head>
+<body>
+	<center>
+		<img src="Images/templogo.jpg" hight="200" width="600">
+		<form action="Student/studentHome.html" method="post">
+			<label>Email</label>
+			<input type="email" name="username" id="username">
 			<br>
-			<a href="forgotpassword.html">Forgot your password?</a>
-		</center>
-	</body>
+			<label>Password</label>
+			<input type="Password" name="password" id="password">
+			<br>
+			<br>
+			<input type="submit" value="Login" onsubmit="signIn();">
+		</form>
+
+		<script>
+		var email = document.getElementById("username").value;
+		var password = document.getElementById("password").value;
+
+
+		function signIn() {
+			firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+				// Handle Errors here.
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				// ...
+			});
+		}
+		</script>
+
+		<br>
+		<a href="forgotpassword.html">Forgot your password?</a>
+	</center>
+</body>
 </html>
