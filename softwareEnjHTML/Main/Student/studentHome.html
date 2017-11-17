@@ -104,7 +104,10 @@ fileButton.addEventListener('change', function(e){
 
 	name.innerHTML = file.name;
 	download.appendChild(a);
-	feedback.appendChild(feedbackButton);
+
+	if(file.name.slice(-3) == 'pdf') {
+		feedback.appendChild(feedbackButton);
+	}
 
 	var br = document.createElement('br');
 	i = i+1;

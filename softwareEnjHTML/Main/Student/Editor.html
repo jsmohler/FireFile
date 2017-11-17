@@ -13,8 +13,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.17.0/codemirror.css" />
 
   <!-- Firepad -->
-  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
+  <link rel="stylesheet" href="firepad.css" />
   <script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
+
+  <script src="firepad-userlist.js"></script>
+  <link rel="stylesheet" href="firepad-userlist.css" />
 
   <style>
   html { height: 100%; }
@@ -27,6 +30,7 @@
     float: right;
   }
 
+/* Begin code written by our group */
   .navbar {
     overflow: hidden;
     background-color: #8B2332;
@@ -54,6 +58,25 @@
   #fileButton {
     float:right;
   }
+
+  #userlist {
+    position: absolute; left: 25px; top: 225px; bottom: 0; height: auto;
+    width: 175px;
+  }
+
+  .newPad {
+    position:absolute; right: 20px; top: 77px;
+  }
+
+  #newPadButton {
+    background-color: #8B6F4B;
+    border-radius: 7px;
+    padding: 5px;
+    color: black;
+    z-index: 10;
+  }
+
+
   </style>
 </head>
 <body onload="init()">
@@ -67,12 +90,15 @@
     <a href="studentAccount.html">Account</a>
   </div>
 
+  <input onclick="window.location.href='Editor.html'" type="button" class="newPad" id="newPadButton" value="Create New File" />
+<!-- End Code written by our group -->
+
+  <div id="userlist"></div>
   <div id="firepad-container"></div>
 
   <script>
   function init() {
     //// Initialize Firebase.
-    //// TODO: replace with your Firebase project configuration.
     var config = {
       apiKey: "AIzaSyDfBsx-cINFNm1qhEwCP80gEmmEc5rvSnw",
       databaseURL: "https://softwareengineeringproje-be6d0.firebaseio.com"
@@ -82,9 +108,14 @@
     var firepadRef = getExampleRef();
     //// Create CodeMirror (with lineWrapping on).
     var codeMirror = CodeMirror(document.getElementById('firepad-container'), { lineWrapping: true });
-    //// Create Firepad (with rich text toolbar and shortcuts enabled).
+    // Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
+    var userId = Math.floor(Math.random() * 9999999999).toString();
+    //// Create Firepad (with rich text features and our desired userId).
     var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
-      { richTextToolbar: true, richTextShortcuts: true });
+      { richTextToolbar: true, richTextShortcuts: true, userId: userId});
+      //// Create FirepadUserList (with our desired userId).
+      var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
+      document.getElementById('userlist'), userId);
       //// Initialize contents.
       firepad.on('ready', function() {
         if (firepad.isHistoryEmpty()) {
