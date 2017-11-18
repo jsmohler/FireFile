@@ -1,0 +1,8 @@
+Bob Jacobsen,charlesbradley10@gmail.com,group1,student
+Robert Clark,rob@rob.rob,group1,coursecoordinator
+Fanny Perkins,hownow@browncow.com,group1,projectadvisor
+Jimmy Watters,jim@blim.com,group1,industrypartner
+Bob Jacobsen,charlesbradley10@gmail.com,group2,student
+Robert Clark,rob@rob.rob,group2,coursecoordinator
+Fanny Perkins,hownow@browncow.com,group2,projectadvisor
+Jimmy Watters,jim@blim.com,group2,industrypartner
