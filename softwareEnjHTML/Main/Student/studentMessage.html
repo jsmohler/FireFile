@@ -31,6 +31,7 @@
 		</style>
 	</head>
 	<body>
+		
 		<div class="image">
 			<img src="../Images/tempicon.png">
 		</div>
@@ -44,15 +45,73 @@
 		<hr>
 		<br>
 		<div style="margin-left: 650px">
-			<form id="message">
-				<label>Subject:</label>
-				<input type="text" value="Enter the Message subject">
+			<form method="post">
+				<label for="subject">Subject:</label>
+				<input type="text" name="subject" id="subject">
 				<br>
 				<br>
-				<textarea rows="6" cols="30" form="message">Enter your Message</textarea>
+				<label for="message">Message:</label>
+				<textarea name="message" id="message" rows="6" cols="30" form="message">Enter your Message</textarea>
 				<br>
-				<input type="submit" value="Send" style="margin-left: 95px">
+				<input type="button" id="messageButton" name="send" value="Send Message" style="margin-left: 95px">
 			</form>
 		</div>
+		
 	</body>
+	<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+	<script>
+	// Initialize Firebase
+	var config = 
+	{
+		apiKey: "AIzaSyDfBsx-cINFNm1qhEwCP80gEmmEc5rvSnw",
+		authDomain: "softwareengineeringproje-be6d0.firebaseapp.com",
+		databaseURL: "https://softwareengineeringproje-be6d0.firebaseio.com",
+		projectId: "softwareengineeringproje-be6d0",
+		storageBucket: "softwareengineeringproje-be6d0.appspot.com",
+		messagingSenderId: "350274872134"
+	};
+
+	firebase.initializeApp(config);
+
+	//initialize an instance of Cloud Firestore through Firebase
+	var firestore = firebase.firestore();
+	var messageBox = document.getElementById("message");
+	var messageButton = document.getElementById("messageButton")
+				
+	messageButton.addEventListener("click", function()
+	{
+		var name = messageBox.value;
+		console.log("name set to: " + name)
+		getUsersInGroup(name);
+		console.log("exited event Listener for messageButton")
+		});
+				
+		//return all students in groupName
+		function getUsersInGroup(groupName)
+		{
+			//all users in the specified group that are students
+			var docRef = firestore.collection("/Class/classDocument/Groups/" + groupName + "/Users/")
+			//.where("email", "==", "charlesbradley10@gmail.com");
+			//.where("name", "==", "Bob Jacobsen");
+			.where("class", "==", "student");
+
+			//var query = docRef.where("classification", "==", " student");
+			//make a reference to the students
+			docRef.get()
+			//execute following function on each student
+			.then(function(querySnapshot)
+			{
+				querySnapshot.forEach(function(doc)
+				{
+					//email of all students: doc.data().email
+					console.log(doc.id, " => ", doc.data().email);
+				});
+			})
+			.catch(function(error) 
+			{
+				console.log("Error getting documents: ", error);
+			});
+		}				
+	</script>
 </html>

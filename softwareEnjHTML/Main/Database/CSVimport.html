@@ -101,12 +101,22 @@ function createUser(userName, userEmail, userGroup, userClassification)
         name: userName,
         email: userEmail,
         group: userGroup,
-        classification: userClassification
+        class: userClassification
     }).then(function(docRef) {
         console.log("Saved.");
     }).catch(function(error) {
         console.error("Error adding document: ", error);
     });
+
+    var docRef2 = firestore.collection("/Class/classDocument/UsersByEmail").doc(userEmail);
+    docRef2.set({
+        Group: userGroup
+    }).then(function(docRef) {
+        console.log("Saved.");
+    }).catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+
 }
 </script>
 <input type="file" id="fileUpload" />
