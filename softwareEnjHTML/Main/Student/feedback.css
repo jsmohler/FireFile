@@ -1,0 +1,211 @@
+.navbar {
+    overflow: hidden;
+    background-color: #8B2332;
+  }
+  .navbar a {
+    display: inline-block;
+    color: #8B6F4B;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 20px;
+  }
+  .navbar a:hover {
+    background-color: #8B6F4B;
+    color: black;
+  }
+  .navbar a:active {
+    background-color: #8B6F4B;
+    color: black;
+  }
+  .image {
+    float: left;
+    display: inline-block;
+  }
+
+  /*.flexing {
+    display: flex;
+    flex-wrap: row wrap;
+    flex-direction: column;
+  }
+
+.flex1 {
+    flex: 2 200px;
+    
+  }
+
+  .flex2 {
+    flex: 1 100px;
+    
+  }
+
+  .flex3 {
+    flex: 2 200px;
+  }
+
+  .flex4 {
+
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: relative;
+  }
+
+   .flex5 {
+
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }*/
+
+/*form{
+  width: 350px;
+  position: absolute;
+  top: 140px;
+  right: 10px;
+  
+  border: 3px solid grey;
+  background-color: silver;
+  box-shadow: 15px 15px 15px silver;
+  border-radius: 20px;
+  padding: 0;
+  padding-top: 15px;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: inline-block;
+  float: right;
+
+}
+*/
+#iframe{
+  width: auto;
+  position: absolute;
+  top: 165px;
+  right: 450px;
+  bottom: auto;
+
+}
+
+form{
+  width: 350px;
+  height: auto;
+  position: fixed;
+  top: 100px;
+  right: 10px;
+  padding: 0;
+  padding-top: 15px;
+  float: right;
+
+}
+
+
+
+ul{
+
+  list-style-type: none;
+}
+
+ul li {
+  clear: both;
+  display: block;
+}
+
+fieldset{
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+
+
+label{
+  display: block;
+  float: left;
+  width: 100px;
+  text-align: left;
+  color: black;
+  font-size: 16px;
+  font-weight: normal;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+}
+
+legend{
+  display: inline;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#sub1{
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+  background: white;
+  border-radius: 10px;
+  font-size: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  float: left;
+}
+
+input[type="text"]
+{
+  width: 120px;
+  height: 20px;
+  background-color: none;
+  color: none;
+  font-weight: normal;
+  border-radius: 5px;
+}
+
+textarea{
+  clear: both;
+  display: block;
+  width: 190px;
+  height: 100px;
+  overflow: auto;
+  background: white;
+  font-weight: normal;
+  border-radius: 5px;
+  border: 1px solid grey;
+  color: grey;
+
+}
+
+#feedbackbox{
+  clear: both;
+  position: relative;
+  top: 400px;
+  right: 10px;
+  width: 350px;
+  height: auto;
+
+
+
+ 
+  
+  border-radius: 20px;
+  padding: 0;
+  padding-top: 15px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: 3em;
+  box-sizing: border-box;
+  display: inline-block;
+  float: right;
+  
+
+}
+
+
+
+
+

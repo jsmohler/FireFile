@@ -3,11 +3,28 @@
 <head>
   <title>Feedback</title>
   <charset meta="utf-8" />
-  <link rel="stylesheet" href="../CSS/navbar.css"/>
-  <link rel="stylesheet" href="../CSS/feedback.css"/>
+  <link rel="stylesheet" href="feedback.css">
+
+  <script>
+  function post()
+  {
+    var inputComment = document.getElementById("comment");
+
+    document.getElementById("feedbackcomments").insertAdjacentHTML('afterbegin', inputComment.value + "<br>["+ Date()+ "] " + "<br><br>");
+
+
+  }
+
+  function postAlert()
+  {
+    alert("Comment has been submitted!");
+  }
+  </script>
+
 </head>
 <body>
 
+<main>
   <div class="image">
     <img src="../Images/tempicon.png">
   </div>
@@ -17,44 +34,55 @@
     <a href="studentMessage.html">Message Team</a>
     <a href="studentAccount.html">Account</a>
   </div>
-  <div style="margin-left: 225px" class="flexing">
-    <h1 class"flex3"> Feedback </h1>
+  <div  class="flexing">
+    <h1> Feedback </h1>
     <div class="flex4">
-      <div id="frame" class="flex1" style="height:400px;width:100%"> </div>
-      <div class="flex2">
-        <input type="button" value="Add Comment" class="button" onclick="addComment()"/>
-        <table id="comments" style="float:right;" cellpadding="10">
-        </table>
-      </div>
+      <div id="frame" class="flex1"> </div>
     </div>
   </div>
+</main>
 
+<form class="commentBox" id="form" onsubmit="return false;">
+      <ul>
+        <li>
+          <fieldset id="usercommentCustomer">
+            <legend> </legend>
+            <ul>
+              <li>
+                <label id="usercomment">Comment</label>
+                <textarea id="comment" name="comment">  </textarea><br>
+              </li>
+            </ul>
+          </fieldset>
+        </li>
+        <li>
+          <fieldset>
+            <ul>
+              <li>
+                <button onmouseup="postAlert();" onclick="post();" id="sub1" type="submit" value="Submit">Submit</button>
+              </li>
+            </ul>
+          </fieldset>
+        </li>
+      </ul>
+    </form>
+    <div id="feedbackbox">
+      <p id="feedbackcomments"> </p>
+    </div>
 
   <script>
-  i = 0;
-  function addComment() {
-    var comment = prompt("Please enter your comment");
-    var table = document.getElementById('comments');
-    var row = table.insertRow(i);
-    var add = row.insertCell(0);
-
-    var container = document.createElement('div');
-    container.style = "max-width:350px; height:150px; overflow-y:scroll; word-wrap:break-word;"
-    var text = document.createElement('p');
-    text.innerHTML = comment;
-    container.appendChild(text);
-    add.appendChild(container);
-    i=i+1;
-  }
 
   var name = window.location.hash;
   var file = localStorage.getItem(name);
   var feedback = document.createElement('iframe');
   feedback.src = file;
-  feedback.style = "width:90%; height:100%;"
+  feedback.style = "width:55%; height:100%;"
 
   var div = document.getElementById('frame');
   div.appendChild(feedback);
   </script>
 </body>
 </html>
+
+  
+
