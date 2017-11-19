@@ -4,7 +4,7 @@
 	<title>Home</title>
 	<link rel="stylesheet" href="../CSS/home.css">
 </head>
-<body onload="getGroup();loadFiles();">
+<body onload="getGroup();">
 	<div class="image">
 		<img src="../Images/tempicon.png">
 	</div>
@@ -47,6 +47,7 @@ var config =
 };
 
 firebase.initializeApp(config);
+window.loadFiles();
 
 function getGroup() {
 	////Insert method for finding group of logged-in user
@@ -60,7 +61,7 @@ function getGroup() {
 	var firestore = firebase.firestore();
 	var docRef = firestore.collection("/Class/classDocument/UsersByEmail/").doc(username);
 
- 	docRef.get().then(function(doc) {
+	docRef.get().then(function(doc) {
 		if (doc.exists) {
 			var group = doc.data().Group;
 			window.sessionStorage.setItem("group", group);
@@ -73,12 +74,12 @@ function getGroup() {
 }
 
 function loadFiles(){
-	////Insert code for finding folder for that group in storage
-	var storageRef = firebase.storage().ref(window.sessionStorage.getItem("group"));
-	console.log(storageRef);
-	////Insert code for changing table to list all files
-
-	////Insert code for changing i in the code that update the table
+	var firestore = firebase.firestore();
+	var docRef = firestore.collection("/Class/classDocument/Groups/" + sessionStorage.getItem("group") + "/Files").get().then(function(querySnapshot) {
+		querySnapshot.forEach(function(doc) {
+			displayFile(doc.data().name, doc.data().link);
+		});
+	});
 }
 
 var fileButton = document.getElementById("fileButton");
@@ -88,6 +89,7 @@ var i = 0;
 fileButton.addEventListener('change', function(e){
 	var file = e.target.files[0];
 	var location = sessionStorage.getItem("group") + "/" + file.name;
+	console.log("Location: " + location);
 	var storageRef = firebase.storage().ref(location);
 	storageRef.put(file);
 	/*End copied code*/
