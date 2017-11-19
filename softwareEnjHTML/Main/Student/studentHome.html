@@ -53,11 +53,10 @@ function getGroup() {
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user != null) {
 			var email = user.email;
+			console.log(email);
 			window.localStorage.setItem("user", user.email);
 		}
 		console.log(user);
-	}).catch(function(error) {
-		console.log("Error getting user:", error);
 	});
 	var username = window.localStorage.getItem("user");
 	console.log(username);
