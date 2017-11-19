@@ -53,21 +53,17 @@ function getGroup() {
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user != null) {
 			var email = user.email;
-			console.log(email);
-			window.localStorage.setItem("user", user.email);
+			window.localStorage.setItem("user", email);
 		}
-		console.log(user);
 	});
 	var username = window.localStorage.getItem("user");
-	console.log(username);
 	var firestore = firebase.firestore();
-	var docRef = firestore.collection("/Class/classDocument/UsersByName/").doc(username);
+	var docRef = firestore.collection("/Class/classDocument/UsersByEmail/").doc(username);
 
  	docRef.get().then(function(doc) {
 		if (doc.exists) {
 			var group = doc.data().Group;
 			window.sessionStorage.setItem("group", group);
-			return group;
 		} else {
 			console.log("No such user!");
 		}
@@ -101,7 +97,7 @@ fileButton.addEventListener('change', function(e){
 function displayFile(filename, link){
 	var list = document.getElementById('fileNames');
 	var a = document.createElement('a');
-	var link = "https://firebasestorage.googleapis.com/v0/b/softwareengineeringproje-be6d0.appspot.com/o/" + getGroup() + "%2F"  + filename + "?alt=media&token=23a50f35-7cbc-4006-95a3-605197e5fef9";
+	var link = "https://firebasestorage.googleapis.com/v0/b/softwareengineeringproje-be6d0.appspot.com/o/" + sessionStorage.getItem("group") + "%2F"  + filename + "?alt=media&token=23a50f35-7cbc-4006-95a3-605197e5fef9";
 
 	a.href = link;
 	a.innerHTML = "Download";
