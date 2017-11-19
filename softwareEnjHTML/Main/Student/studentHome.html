@@ -51,9 +51,9 @@ firebase.initializeApp(config);
 function getGroup() {
 	////Insert method for finding group of logged-in user
 	firebase.auth().onAuthStateChanged(function(user) {
-		window.sessionStorage("user", user);
+		window.sessionStorage.setItem("user", user);
 	});
-	var username = window.sessionStorage("user");
+	var username = window.sessionStorage.getItem("user");
 	console.log(username);
 	var firestore = firebase.firestore();
 	var docRef = firestore.collection("/Class/classDocument/UsersByName/").doc(username);
