@@ -93,6 +93,17 @@ fileButton.addEventListener('change', function(e){
 	var storageRef = firebase.storage().ref(location);
 	storageRef.put(file);
 	/*End copied code*/
+	var firestore = firebase.firestore();
+	var docRef = firestore.collection("/Class/classDocument/Groups/" + sessionStorage.getItem("group") + "/Files").doc(file.name);
+	docRef.set({
+		name: file.name,
+		link: "https://firebasestorage.googleapis.com/v0/b/softwareengineeringproje-be6d0.appspot.com/o/" + sessionStorage.getItem("group") + "%2F"  + file.name + "?alt=media&token=23a50f35-7cbc-4006-95a3-605197e5fef9",
+	}).then(function(docRef) {
+			console.log("Saved.");
+	}).catch(function(error) {
+			console.error("Error adding document: ", error);
+	});
+
 	window.displayFile(file.name);
 })
 
