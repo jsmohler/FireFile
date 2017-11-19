@@ -51,18 +51,17 @@ firebase.initializeApp(config);
 function getGroup() {
 	////Insert method for finding group of logged-in user
 	firebase.auth().onAuthStateChanged(function(user) {
-		window.sessionStorage.setItem("user", user);
+		window.localStorage.setItem("user", user);
+		console.log(user);
 	});
-	var username = window.sessionStorage.getItem("user");
+	var username = window.localStorage.getItem("user");
 	console.log(username);
 	var firestore = firebase.firestore();
 	var docRef = firestore.collection("/Class/classDocument/UsersByName/").doc(username);
-	let group = "hello";
 
-	//Following code from https://firebase.google.com/docs/firestore/query-data/get-data
  	docRef.get().then(function(doc) {
 		if (doc.exists) {
-			group = doc.data().Group;
+			var group = doc.data().Group;
 			window.sessionStorage.setItem("group", group);
 			return group;
 		} else {
@@ -71,7 +70,6 @@ function getGroup() {
 	}).catch(function(error) {
 		console.log("Error getting user:", error);
 	});
-	//End borrowed code
 }
 
 function loadFiles(){
