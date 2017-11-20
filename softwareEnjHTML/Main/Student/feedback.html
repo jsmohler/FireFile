@@ -12,7 +12,10 @@
 
     document.getElementById("feedbackcomments").insertAdjacentHTML('afterbegin', inputComment.value + "<br>["+ Date()+ "] " + "<br><br>");
 
-
+// I received the following code for resetting a form from https://stackoverflow.com/questions/20416803/how-do-i-clear-the-previous-text-field-value-after-submitting-the-form-with-out 
+   var frm = document.getElementsByName('commentform')[0];
+   frm.reset();  // Reset
+   
   }
 
   function postAlert()
@@ -42,7 +45,7 @@
   </div>
 </main>
 
-<form class="commentBox" id="form" onsubmit="return false;">
+<form class="commentBox" name="commentform" onsubmit="return false;">
       <ul>
         <li>
           <fieldset id="usercommentCustomer">
@@ -64,11 +67,18 @@
             </ul>
           </fieldset>
         </li>
+        <li>
+          <ul>
+            <li>
+            <p id="feedbackcomments"> </p>
+          </li>
+        </ul>
+      </li>
       </ul>
     </form>
-    <div id="feedbackbox">
+    <!-- <div id="feedbackbox">
       <p id="feedbackcomments"> </p>
-    </div>
+    </div> -->
 
   <script>
 
@@ -76,7 +86,7 @@
   var file = localStorage.getItem(name);
   var feedback = document.createElement('iframe');
   feedback.src = file;
-  feedback.style = "width:55%; height:100%;"
+  feedback.style = "width:85%; height:100%;"
 
   var div = document.getElementById('frame');
   div.appendChild(feedback);

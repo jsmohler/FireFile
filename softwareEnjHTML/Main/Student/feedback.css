@@ -76,20 +76,21 @@
 
 }
 */
-#iframe{
+#frame{
   width: auto;
+  height: 800px;
   position: absolute;
   top: 165px;
-  right: 450px;
-  bottom: auto;
+  right: 250px;
+  left: 250px;
 
 }
 
 form{
   width: 350px;
   height: auto;
-  position: fixed;
-  top: 100px;
+  position: absolute;
+  top: 120px;
   right: 10px;
   padding: 0;
   padding-top: 15px;
@@ -97,6 +98,19 @@ form{
 
 }
 
+#feedbackcomments{
+  display: block;
+  width: 300px;
+  height: auto;
+  position: absolute;
+  top: 350px;
+  right: 10px;
+ 
+  padding-top: 15px;
+  float: right;
+  
+  
+}
 
 
 ul{
@@ -178,32 +192,7 @@ textarea{
 
 }
 
-#feedbackbox{
-  clear: both;
-  position: relative;
-  top: 400px;
-  right: 10px;
-  width: 350px;
-  height: auto;
 
-
-
- 
-  
-  border-radius: 20px;
-  padding: 0;
-  padding-top: 15px;
-  overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: 3em;
-  box-sizing: border-box;
-  display: inline-block;
-  float: right;
-  
-
-}
 
 
 
