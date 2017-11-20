@@ -5,4 +5,6 @@ Jimmy Watters,jim@blim.com,group1,industrypartner
 Bob Jacobsen,charlesbradley10@gmail.com,group2,student
 Robert Clark,rob@rob.rob,group2,coursecoordinator
 Fanny Perkins,hownow@browncow.com,group2,projectadvisor
-Jimmy Watters,jim@blim.com,group2,industrypartner
+Jimmy Watters,jim@blim.com,group2,industrypartners
+Reuben Smith,reubensmith@gmail.com,group1,student
+Cedric Smith,cedric.m.smith@outlook.com,group2,student
