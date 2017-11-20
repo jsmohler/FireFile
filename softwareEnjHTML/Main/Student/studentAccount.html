@@ -2,9 +2,39 @@
 <html>
 	<head>
 		<title>Home</title>
-		<script src="studentAccount.js">
-		</script>
+		
+
 		<link rel="stylesheet" href="../CSS/navbar.css"/>
+		<!-- Import and configure the Firebase SDK -->
+ 
+ <!-- These script files were obtained from Firebase https://github.com/firebase/quickstart-js/blob/master/auth/email.html#L95-L107-->
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-messaging.js"></script>
+  <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
+  <!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
+  <script src="/__/firebase/4.0.0/firebase-app.js"></script>
+  <script src="/__/firebase/4.0.0/firebase-auth.js"></script>
+  <script src="/__/firebase/init.js"></script>
+
+		<script type="text/javascript">
+    
+//This code was obtained from https://stackoverflow.com/questions/38965060/how-do-i-redirect-the-user-after-a-successful-login-on-firebase
+function signout(){
+firebase.auth().onAuthStateChanged(user => {
+  if(user) {
+    alert("Log Out Successful!");
+    window.location = '../index.html'; 
+  }
+});
+
+}
+</script>
+
+
+
 	</head>
 	<body>
 		<div class="image">
@@ -21,9 +51,12 @@
 			<hr>
 		</div>
 		<div style="margin-left: 225px">
-			<a href="../login.html">Logout</a>
+		
+			<button onclick="window.open('../forgotpassword.html')">Change Password</button>
 			<br>
-			<a href="../newpassword.html">Change Password</a>
+			<button onclick="signout();" >Log Out</button>
 		</div>
+
+
 	</body>
 </html>
