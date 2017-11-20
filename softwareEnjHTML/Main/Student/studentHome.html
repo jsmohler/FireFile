@@ -20,12 +20,10 @@
 			<legend> Upload File </legend>
 			<input type="file" id="fileButton" style="float:right"/>
 		</fieldset>
-		<form action="Editor.html">
-			<fieldset style="float:right;">
-				<legend> Create New File </legend>
-				<input type="submit" value="Create" />
-			</fieldset>
-		</form>
+		<fieldset style="float:right;">
+			<legend> Create New File </legend>
+			<input type="button" value="Create" id="firepad"/>
+		</fieldset>
 		<table id="fileNames" cellpadding="10">
 		</table>
 	</div>
@@ -64,7 +62,7 @@ function getGroup() {
 	docRef.get().then(function(doc) {
 		if (doc.exists) {
 			var group = doc.data().Group;
-			window.sessionStorage.setItem("group", group);
+			window.localStorage.setItem("group", group);
 		} else {
 			console.log("No such user!");
 		}
@@ -75,7 +73,7 @@ function getGroup() {
 
 function loadFiles(){
 	var firestore = firebase.firestore();
-	var docRef = firestore.collection("/Class/classDocument/Groups/" + sessionStorage.getItem("group") + "/Files").get().then(function(querySnapshot) {
+	var docRef = firestore.collection("/Class/classDocument/Groups/" + localStorage.getItem("group") + "/Files").get().then(function(querySnapshot) {
 		querySnapshot.forEach(function(doc) {
 			displayFile(doc.data().name, doc.data().link);
 		});
@@ -88,32 +86,63 @@ var i = 0;
 /*The following code for the choose file and upload file was obtained from https://community.thunkable.com/t/uploading-files-to-firebase/1916 */
 fileButton.addEventListener('change', function(e){
 	var file = e.target.files[0];
-	var location = sessionStorage.getItem("group") + "/" + file.name;
-	console.log("Location: " + location);
+	var location = localStorage.getItem("group") + "/" + file.name;
 	var storageRef = firebase.storage().ref(location);
 	storageRef.put(file);
+	var absLocation = "https://firebasestorage.googleapis.com/v0/b/softwareengineeringproje-be6d0.appspot.com/o/" + localStorage.getItem("group") + "%2F"  + file.name + "?alt=media&token=23a50f35-7cbc-4006-95a3-605197e5fef9";
+
 	/*End copied code*/
 	var firestore = firebase.firestore();
-	var docRef = firestore.collection("/Class/classDocument/Groups/" + sessionStorage.getItem("group") + "/Files").doc(file.name);
+	var docRef = firestore.collection("/Class/classDocument/Groups/" + localStorage.getItem("group") + "/Files").doc(file.name);
 	docRef.set({
 		name: file.name,
-		link: "https://firebasestorage.googleapis.com/v0/b/softwareengineeringproje-be6d0.appspot.com/o/" + sessionStorage.getItem("group") + "%2F"  + file.name + "?alt=media&token=23a50f35-7cbc-4006-95a3-605197e5fef9",
+		link: absLocation,
 	}).then(function(docRef) {
 			console.log("Saved.");
 	}).catch(function(error) {
 			console.error("Error adding document: ", error);
 	});
 
-	window.displayFile(file.name);
+	window.displayFile(file.name, absLocation);
+})
+
+var firepadButton = document.getElementById("firepad");
+
+firepadButton.addEventListener('click', function() {
+	var ref = firebase.database().ref();
+	var hash = window.location.hash.replace(/#/g, '');
+
+	if (hash) {
+		ref = ref.child(hash);
+	} else {
+		ref = ref.push(); // generate unique location.
+	}
+	if (typeof console !== 'undefined') {
+		console.log('Firebase data: ', ref.toString());
+	}
+
+	var filename = window.prompt("What woud you like to name your file?");
+	var link = "https://softwareengineeringproje-be6d0.firebaseapp.com/Student/Editor.html?#" + ref.key;
+
+	var firestore = firebase.firestore();
+	var docRef = firestore.collection("/Class/classDocument/Groups/" + localStorage.getItem("group") + "/Files").doc(filename + ".fp");
+	docRef.set({
+		name: filename + ".fp",
+		link: link,
+	}).then(function(docRef) {
+			console.log("Saved.");
+	}).catch(function(error) {
+			console.error("Error adding document: ", error);
+	});
+
+	displayFile(filename + ".fp", link);
 })
 
 function displayFile(filename, link){
 	var list = document.getElementById('fileNames');
 	var a = document.createElement('a');
-	var link = "https://firebasestorage.googleapis.com/v0/b/softwareengineeringproje-be6d0.appspot.com/o/" + sessionStorage.getItem("group") + "%2F"  + filename + "?alt=media&token=23a50f35-7cbc-4006-95a3-605197e5fef9";
 
 	a.href = link;
-	a.innerHTML = "Download";
 
 	var feedbackButton = document.createElement('a');
 	feedbackButton.href = "feedback.html?a=#" + filename;
@@ -122,8 +151,6 @@ function displayFile(filename, link){
 	button.value = "Add Feedback";
 	feedbackButton.appendChild(button);
 
-	localStorage.setItem("#" + filename, link);
-
 	var row = list.insertRow(i);
 	var name = row.insertCell(0);
 	var download = row.insertCell(1);
@@ -131,14 +158,22 @@ function displayFile(filename, link){
 	var grade = row.insertCell(3);
 
 	name.innerHTML = filename;
-	download.appendChild(a);
 
 	if(filename.slice(-3) == 'pdf') {
 		feedback.appendChild(feedbackButton);
+		localStorage.setItem("#" + filename, link);
 	}
 
+	if(filename.slice(-2) == 'fp') {
+		a.innerHTML = "Edit";
+	} else {
+		a.innerHTML = "Download";
+	}
+
+	download.appendChild(a);
 	i = i+1;
 }
+
 </script>
 
 </body>

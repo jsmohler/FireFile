@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<title>Contact Info</title>
-		<script src="studentContactInfo.js">
 		</script>
 		<link rel="stylesheet" href="../CSS/navbar.css"/>
 	</head>
@@ -19,53 +18,90 @@
 		<div style="margin-left: 225px">
 			<h1> Contact Information </h1>
 			<hr>
-			<h3>Industry Partner</h3>
-			<table border="1">
+			<h3>Course Coordinator</h3>
+			<table border="1" id="coursecoordinator">
 				<tr>
 					<td align="center">Name</td>
 					<td align="center">Email</td>
 				</tr>
+			</table>
+			<br>
+			<h3>Industry Partner</h3>
+			<table border="1" id="industrypartner">
 				<tr>
-					<td>Example Name</td>
-					<td>Example@Example.com</td>
+					<td align="center">Name</td>
+					<td align="center">Email</td>
 				</tr>
 			</table>
 			<br>
 			<h3>Team Members</h3>
-			<table border="1">
+			<table border="1" id="student">
 				<tr>
 					<td align="center">Name</td>
 					<td align="center">Email</td>
-				</tr>
-				<tr>
-					<td>Example Name</td>
-					<td>Example@Example.com</td>
-				</tr>
-			</table>
-			<br>
-			<h3>Course Coordinator</h3>
-			<table border="1">
-				<tr>
-					<td align="center">Name</td>
-					<td align="center">Email</td>
-				</tr>
-				<tr>
-					<td>Example Name</td>
-					<td>Example@Example.com</td>
 				</tr>
 			</table>
 			<br>
 			<h3>Project Advisor</h3>
-			<table border="1">
+			<table border="1" id="projectadvisor">
 				<tr>
 					<td align="center">Name</td>
 					<td align="center">Email</td>
 				</tr>
-				<tr>
-					<td>Example Name</td>
-					<td>Example@Example.com</td>
-				</tr>
 			</table>
 		</div>
+
+		<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+		<script>
+		// Initialize Firebase
+		var config =
+		{
+			apiKey: "AIzaSyDfBsx-cINFNm1qhEwCP80gEmmEc5rvSnw",
+			authDomain: "softwareengineeringproje-be6d0.firebaseapp.com",
+			databaseURL: "https://softwareengineeringproje-be6d0.firebaseio.com",
+			projectId: "softwareengineeringproje-be6d0",
+			storageBucket: "softwareengineeringproje-be6d0.appspot.com",
+			messagingSenderId: "350274872134"
+		};
+
+		firebase.initializeApp(config);
+		window.getUsersInGroup(localStorage.getItem('group'), "class", "student");
+		window.getUsersInGroup(localStorage.getItem('group'), "class", "coursecoordinator");
+		window.getUsersInGroup(localStorage.getItem('group'), "class", "projectadvisor");
+		window.getUsersInGroup(localStorage.getItem('group'), "class", "industrypartner");
+		//return all students in groupName
+		function getUsersInGroup(groupName, type, value)
+		{
+			//all users in the specified group that are students
+			var firestore = firebase.firestore();
+			var docRef = firestore.collection("/Class/classDocument/Groups/" + groupName + "/Users/").where(type, "==", value);
+
+			//var query = docRef.where("classification", "==", " student");
+			//make a reference to the students
+			docRef.get()
+			//execute following function on each student
+			.then(function(querySnapshot)
+			{
+				querySnapshot.forEach(function(doc)
+				{
+					var row = document.createElement('tr');
+					var name = document.createElement('td');
+					var email = document.createElement('td');
+					name.innerHTML = doc.id;
+					email.innerHTML = doc.data().email;
+					row.appendChild(name);
+					row.appendChild(email);
+
+					var table = document.getElementById(value);
+					table.appendChild(row);
+				});
+			})
+			.catch(function(error)
+			{
+				console.log("Error getting documents: ", error);
+			});
+		}
+		</script>
 	</body>
 </html>
