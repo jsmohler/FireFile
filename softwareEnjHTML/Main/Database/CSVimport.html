@@ -3,14 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    
 </head>
 <body>
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
 <script>
 // Initialize Firebase
-var config = 
+var config =
 {
     apiKey: "AIzaSyDfBsx-cINFNm1qhEwCP80gEmmEc5rvSnw",
     authDomain: "softwareengineeringproje-be6d0.firebaseapp.com",
@@ -32,9 +31,9 @@ const inputFile = document.getElementById('myFile');
 function Upload() {
     var fileUpload = document.getElementById("fileUpload");
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-    if (regex.test(fileUpload.value.toLowerCase())) 
+    if (regex.test(fileUpload.value.toLowerCase()))
     {
-        if (typeof (FileReader) != "undefined") 
+        if (typeof (FileReader) != "undefined")
         {
             var reader = new FileReader();
             reader.onload = function(csv)
@@ -57,40 +56,21 @@ function Upload() {
 
                     //create the user and add it to the database
                     createUser(name, email, group, classification);
-    
-                } 
-            } 
+
+                }
+            }
             reader.readAsText(fileUpload.files[0]);
-        } 
-        else 
+        }
+        else
         {
             alert("This browser does not support HTML5.");
         }
-    } 
-    else 
+    }
+    else
     {
         alert("Please upload a valid CSV file.");
     }
 }
-
-/* This function was gutted and inserted into Upload() starting on line 42
-//parse CSV file into users to be added into Cloud FireStore
-function parseCSV(csv)
-{
-    //
-    var rows = csv.target.result.split("\n");
-    for(var i = 0; i < rows.length; i++)
-    {
-        var currentline = lines[i].split(",");
-        var name = currentline[0];
-        var email= currentline[1];
-        var group = currentline[2];
-        var classification = currentline[3];
-
-        createUser(name, email, group, classification);
-    
-    }
-} */
 
 //creates a user in firebase Cloud FireStore
 function createUser(userName, userEmail, userGroup, userClassification)
@@ -126,4 +106,3 @@ function createUser(userName, userEmail, userGroup, userClassification)
 </div>
 </body>
 </html>
-
