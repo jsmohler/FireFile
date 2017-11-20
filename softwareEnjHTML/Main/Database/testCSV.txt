@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Bob Jacobsen,charlesbradley10@gmail.com,group1,student
 Robert Clark,rob@rob.rob,group1,coursecoordinator
 Fanny Perkins,hownow@browncow.com,group1,projectadvisor
@@ -8,3 +9,9 @@ Fanny Perkins,hownow@browncow.com,group2,projectadvisor
 Jimmy Watters,jim@blim.com,group2,industrypartners
 Reuben Smith,reubensmith@gmail.com,group1,student
 Cedric Smith,cedric.m.smith@outlook.com,group2,student
+=======
+Charlie Clark,charlesbradley10@gmail.com,group1,coursecoordinator
+Jordan Mohler,jordansmohler@gmail.com,group2,student
+Jacob Van Speybroeck,Jacob.VanSpeybroeck@du.edu,group1,industrypartner
+Cedric Smith,cedric.m.smith@gmail.com,group2,projectadvisor
+>>>>>>> 6b8e7ec32ebcf28531991c642d0c70d9cdeffe11
